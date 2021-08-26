@@ -322,6 +322,7 @@ PRODUCT_PACKAGES += \
     fstab.qcom_ramdisk \
     fstab.qcom \
     init.qcom.post_boot.sh \
+    init.qcom.power.rc \
     init.qcom.rc \
     init.qcom.sh \
     init.qcom.usb.rc \
