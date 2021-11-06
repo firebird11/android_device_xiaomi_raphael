@@ -34,8 +34,8 @@ def IncrementalOTA_Assertions(info):
   AddTrustZoneAssertion(info, info.target_zip)
   return
 
-def AddImage(info, basename, dest):
-  path = "IMAGES/" + basename
+def AddImage(info, dir, basename, dest):
+  path = dir + "/" + basename
   if path not in info.input_zip.namelist():
     return
 
@@ -57,4 +57,19 @@ def AddTrustZoneAssertion(info, input_zip):
     if len(versions) and '*' not in versions:
       cmd = 'assert(xiaomi.verify_trustzone(' + ','.join(['"%s"' % tz for tz in versions]) + ') == "1" || abort("ERROR: This package requires firmware from an Android 10 based MIUI build. Please upgrade firmware and retry!"););'
       info.script.AppendExtra(cmd)
+
+  info.script.Print("Patching {} image unconditionally...".format(dest.split('/')[-1]))
+  info.script.AppendExtra('package_extract_file("%s", "%s");' % (basename, dest))
+
+def FullOTA_InstallBegin(info):
+  AddImage(info, "RADIO", "super_dummy.img", "/tmp/super_dummy.img");
+  info.script.AppendExtra('package_extract_file("install/bin/flash_super_dummy.sh", "/tmp/flash_super_dummy.sh");')
+  info.script.AppendExtra('set_metadata("/tmp/flash_super_dummy.sh", "uid", 0, "gid", 0, "mode", 0755);')
+  info.script.AppendExtra('run_program("/tmp/flash_super_dummy.sh");')
+  return
+
+def OTA_InstallEnd(info):
+  AddImage(info, "IMAGES", "dtbo.img", "/dev/block/bootdevice/by-name/dtbo")
+  AddImage(info, "IMAGES", "vbmeta.img", "/dev/block/bootdevice/by-name/vbmeta")
+  AddImage(info, "IMAGES", "vbmeta_system.img", "/dev/block/bootdevice/by-name/vbmeta_system")
   return
