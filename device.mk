@@ -100,13 +100,17 @@ PRODUCT_BOARD_PLATFORM := msmnile
 
 # Camera
 PRODUCT_PACKAGES += \
-    vendor.xiaomi.hardware.motor@1.0.vendor \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service_64 \
+    GCamGOPrebuilt-V2 \
+    libcamera2ndk_vendor \
     libdng_sdk.vendor \
+    libgui_vendor \
     libshim_megvii \
-    libpiex_shim \
+    libstdc++.vendor \
     vendor.qti.hardware.camera.device@1.0.vendor \
     vendor.qti.hardware.camera.postproc@1.0.vendor \
-    libstdc++.vendor
+    vendor.xiaomi.hardware.motor@1.0.vendor
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
