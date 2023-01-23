@@ -275,6 +275,12 @@ on post-fs-data
     setprop log.tag.QtiCarrierConfigHelper WARN
     setprop log.tag.LineageHealth WARN
 
+service nqnfcinfo /system/vendor/bin/nqnfcinfo
+    class late_start
+    group nfc
+    user system
+    oneshot
+
 service iop /vendor/bin/iop
     class main
     user root
