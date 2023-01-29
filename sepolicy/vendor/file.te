@@ -8,6 +8,9 @@ type persist_camera_file, vendor_persist_type, file_type;
 type proc_last_kmsg, fs_type, proc_type;
 type public_adsprpcd_file, file_type;
 
+# KProfiles
+type sysfs_kprofiles, sysfs_type, fs_type;
+
 # Livedisplay
 type vendor_sysfs_hbm, sysfs_type, fs_type;
 
