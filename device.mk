@@ -103,7 +103,6 @@ PRODUCT_PACKAGES += \
     audio.primary.msmnile \
     audio.r_submix.default \
     audio.usb.default \
-    libaacwrapper \
     libaudiopreprocessing \
     libbatterylistener \
     libbundlewrapper \
@@ -160,9 +159,6 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.camera.postproc@1.0.vendor \
     vendor.xiaomi.hardware.motor@1.0.vendor
 
-PRODUCT_PACKAGES += \
-    GoogleCamera
-
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.4-service \
@@ -173,7 +169,6 @@ PRODUCT_PACKAGES += \
     gralloc.msmnile \
     hwcomposer.msmnile \
     libtinyxml \
-    libdisplayconfig \
     libqdMetaData \
     libqdMetaData.system \
     libvulkan \
