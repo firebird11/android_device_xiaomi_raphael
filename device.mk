@@ -215,6 +215,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.3-service.xiaomi_raphael
 
+# Fingerprint animation
+TARGET_HAS_UDFPS := true
+
 # FM
 PRODUCT_PACKAGES += \
     FM2 \
