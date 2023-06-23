@@ -41,23 +41,6 @@ def AddImage(info, dir, basename, dest):
 
   data = info.input_zip.read(path)
   common.ZipWriteStr(info.output_zip, basename, data)
-  info.script.AppendExtra('package_extract_file("%s", "%s");' % (basename, dest))
-
-def OTA_InstallEnd(info):
-  info.script.Print("Patching dtbo and vbmeta images...")
-  AddImage(info, "dtbo.img", "/dev/block/bootdevice/by-name/dtbo")
-  AddImage(info, "vbmeta.img", "/dev/block/bootdevice/by-name/vbmeta")
-  return
-
-def AddTrustZoneAssertion(info, input_zip):
-  android_info = info.input_zip.read("OTA/android-info.txt")
-  m = re.search(r'require\s+version-trustzone\s*=\s*(\S+)'.encode('utf-8'), android_info)
-  if m:
-    versions = m.group(1).split('|')
-    if len(versions) and '*' not in versions:
-      cmd = 'assert(xiaomi.verify_trustzone(' + ','.join(['"%s"' % tz for tz in versions]) + ') == "1" || abort("ERROR: This package requires firmware from an Android 10 based MIUI build. Please upgrade firmware and retry!"););'
-      info.script.AppendExtra(cmd)
-
   info.script.Print("Patching {} image unconditionally...".format(dest.split('/')[-1]))
   info.script.AppendExtra('package_extract_file("%s", "%s");' % (basename, dest))
 
@@ -69,7 +52,17 @@ def FullOTA_InstallBegin(info):
   return
 
 def OTA_InstallEnd(info):
+  info.script.Print("Patching dtbo and vbmeta images...")
   AddImage(info, "IMAGES", "dtbo.img", "/dev/block/bootdevice/by-name/dtbo")
   AddImage(info, "IMAGES", "vbmeta.img", "/dev/block/bootdevice/by-name/vbmeta")
-  AddImage(info, "IMAGES", "vbmeta_system.img", "/dev/block/bootdevice/by-name/vbmeta_system")
+  return
+
+def AddTrustZoneAssertion(info, input_zip):
+  android_info = info.input_zip.read("OTA/android-info.txt")
+  m = re.search(r'require\s+version-trustzone\s*=\s*(\S+)'.encode('utf-8'), android_info)
+  if m:
+    versions = m.group(1).split('|')
+    if len(versions) and '*' not in versions:
+      cmd = 'assert(xiaomi.verify_trustzone(' + ','.join(['"%s"' % tz for tz in versions]) + ') == "1" || abort("ERROR: This package requires firmware from an Android 10 based MIUI build. Please upgrade firmware and retry!"););'
+      info.script.AppendExtra(cmd)
   return
