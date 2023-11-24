@@ -1,4 +1,4 @@
-# Copyright (C) 2023 DerpFest
+# Copyright (C) 2023 crDroid
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,29 +15,14 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/xiaomi/raphael/device.mk)
 
-# Inherit some common DerpFest stuff.
-$(call inherit-product, vendor/derp/config/common_full_phone.mk)
-
+# Inherit some common crDroid stuff.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Bootanimation Resolution
 TARGET_BOOT_ANIMATION_RES := 1080
 
-# Charging Animation
-TARGET_INCLUDE_PIXEL_CHARGER := true
-
-# Disable/Enable Blur Support, default is false
-TARGET_ENABLE_BLUR := true
-
-# Derp
-DERP_BUILDTYPE := Official
-
-EXTRA_UDFPS_ANIMATIONS := true
-
-# Quick Tap Feature
-TARGET_SUPPORTS_QUICK_TAP := true
-
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := derp_raphael
+PRODUCT_NAME := lineage_raphael
 PRODUCT_DEVICE := raphael
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := MI 9T Pro
