@@ -3,3 +3,6 @@ vendor.xiaomi.hardware.fingerprintextension::IXiaomiFingerprint             u:ob
 vendor.xiaomi.hardware.motor::IMotor                                        u:object_r:hal_motor_hwservice_xiaomi:s0
 vendor.nxp.nxpnfc::INxpNfc                  u:object_r:hal_nxpnfc_hwservice:s0
 vendor.nxp.nxpese::INxpEse                  u:object_r:hal_nxpese_hwservice:s0
+
+# Cam postproc
+vendor.xiaomi.hardware.campostproc::IMiPostProcService                                   u:object_r:hal_camerapostproc_xiaomi_hwservice:s0

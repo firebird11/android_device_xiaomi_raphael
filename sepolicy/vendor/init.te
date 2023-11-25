@@ -8,3 +8,5 @@ allow init proc_last_kmsg:file r_file_perms;
 allow init proc_last_kmsg:file setattr;
 
 allow init adsprpcd_file:file mounton;
+
+allow vendor_init vendor_camera_prop:property_service set;
