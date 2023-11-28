@@ -164,9 +164,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.btconfigstore@2.0.vendor
 
 # Blur
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.sf.blurs_are_expensive=1 \
-    ro.surface_flinger.supports_background_blur=1
+TARGET_ENABLE_BLUR := true
 
 # Board
 PRODUCT_USES_QCOM_HARDWARE := true
