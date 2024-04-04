@@ -586,16 +586,6 @@ PRODUCT_COPY_FILES += \
 # Vibrator
 $(call inherit-product, vendor/qcom/opensource/vibrator/vibrator-vendor-product.mk)
 
-# Vulkan
-PRODUCT_PACKAGES += \
-    libvulkan
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
-
 # WiFi
 PRODUCT_PACKAGES += \
     android.media.audio.common.types-V2-cpp \
