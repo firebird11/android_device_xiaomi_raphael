@@ -152,7 +152,7 @@
       "Name": "TAminclamp",
       "Path": "/dev/cpuset/top-app/uclamp.min",
       "Values": [
-        "50",
+        "20",
         "10",
         "0"
       ],
@@ -373,7 +373,7 @@
       "PowerHint": "INTERACTION",
       "Node": "TAminclamp",
       "Duration": 0,
-      "Value": "50"
+      "Value": "20"
     },
     {
       "PowerHint": "LAUNCH",
