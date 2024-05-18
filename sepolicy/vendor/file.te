@@ -11,6 +11,10 @@ type vendor_sysfs_fod, sysfs_type, fs_type;
 # KProfiles
 type sysfs_kprofiles, sysfs_type, fs_type;
 
+# Lineage powerhal
+type sysfs_msm_subsys, fs_type, sysfs_type;
+type sysfs_touchpanel, fs_type, sysfs_type;
+
 # Last_kmsg
 type proc_last_kmsg, fs_type, proc_type;
 
