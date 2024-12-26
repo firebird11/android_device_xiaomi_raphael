@@ -25,21 +25,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter raphael,$(TARGET_DEVICE)),)
+ifeq ($(TARGET_DEVICE),raphael)
 include $(call all-makefiles-under,$(LOCAL_PATH))
-
-LPFLASH := $(HOST_OUT_EXECUTABLES)/lpflash$(HOST_EXECUTABLE_SUFFIX)
-INSTALLED_SUPERIMAGE_DUMMY_TARGET := $(PRODUCT_OUT)/super_dummy.img
-
-$(INSTALLED_SUPERIMAGE_DUMMY_TARGET): $(PRODUCT_OUT)/super_empty.img $(LPFLASH)
-	$(call pretty,"Target dummy super image: $@")
-	$(hide) touch $@
-	$(hide) $(LPFLASH) $@ $(PRODUCT_OUT)/super_empty.img
-
-.PHONY: super_dummyimage
-super_dummyimage: $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
-
-INSTALLED_RADIOIMAGE_TARGET += $(INSTALLED_SUPERIMAGE_DUMMY_TARGET)
 
 include $(CLEAR_VARS)
 
@@ -61,49 +48,5 @@ $(DSP_MOUNT_POINT): $(LOCAL_INSTALLED_MODULE)
 	@mkdir -p $(TARGET_OUT_VENDOR)/dsp
 
 ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT) $(BT_FIRMWARE_MOUNT_POINT) $(DSP_MOUNT_POINT)
-
-IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
-IMS_SYMLINKS := $(addprefix $(TARGET_OUT_SYSTEM_EXT_APPS_PRIVILEGED)/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
-$(IMS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "IMS lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /system_ext/lib64/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(IMS_SYMLINKS)
-
-EGL_LIBS := libEGL_adreno.so libGLESv2_adreno.so libq3dtools_adreno.so
-EGL_32_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/lib/,$(notdir $(EGL_LIBS)))
-$(EGL_32_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "EGL 32 lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf egl/$(notdir $@) $@
-
-EGL_64_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/lib64/,$(notdir $(EGL_LIBS)))
-$(EGL_64_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "EGL lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf egl/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(EGL_32_SYMLINKS) $(EGL_64_SYMLINKS)
-
-EGL_LIBS := libEGL_adreno.so libGLESv2_adreno.so libq3dtools_adreno.so
-EGL_32_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/lib/,$(notdir $(EGL_LIBS)))
-$(EGL_32_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "EGL 32 lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf egl/$(notdir $@) $@
-
-EGL_64_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/lib64/,$(notdir $(EGL_LIBS)))
-$(EGL_64_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "EGL lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf egl/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(EGL_32_SYMLINKS) $(EGL_64_SYMLINKS)
 
 endif
