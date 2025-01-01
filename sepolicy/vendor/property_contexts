@@ -7,6 +7,7 @@ ro.vendor.camera.                                                               
 ro.camera.                                                                                                          u:object_r:vendor_camera_prop:s0
 vendor.camera.                                                                                                      u:object_r:vendor_camera_prop:s0
 vendor.camera.aux.                                                                                                  u:object_r:vendor_camera_prop:s0
+vendor.panel.display                                                                                                u:object_r:vendor_camera_prop:s0
 
 # Fingerprint
 persist.vendor.fingerprint.                                                                                         u:object_r:vendor_fp_prop:s0
